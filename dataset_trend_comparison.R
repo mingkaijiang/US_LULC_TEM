@@ -26,8 +26,22 @@ myDF <- rbind(myDF, inDF3)
 require(ggplot2)
 
 ### plotting
+pdf("trend_comparison.pdf")
 p <- ggplot(myDF, aes(x=year, y=nce, group=dataset)) +
     geom_line(aes(color=dataset))
 plot(p)
 
+p <- ggplot(myDF, aes(x=year, y=nce_cum, group=dataset)) +
+    geom_line(aes(color=dataset))
+plot(p)
+
+p <- ggplot(myDF, aes(x=year, y=nep, group=dataset)) +
+    geom_line(aes(color=dataset))
+plot(p)
+
+p <- ggplot(myDF, aes(x=year, y=nep_cum, group=dataset)) +
+    geom_line(aes(color=dataset))
+plot(p)
+
+dev.off()
 

@@ -35,3 +35,6 @@ vignettes/*.pdf
 
 # R project
 *.Rproj
+
+# ignore pdf output
+*.pdf

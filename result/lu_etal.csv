@@ -1,0 +1,9 @@
+Landcover,NEP,Livestock Resp.,Conversion Flux,Ag. Products,10-yr Products,100-yr Products,NCE,totprdfc_calc,NCE_Calc
+Trees,390,0,16,0,43,18,313,61,313
+Grass,1,0,0,0,0,0,1,0,1
+Shrubs,6,0,0,0,0,0,6,0,6
+Crops,236,0,1,227,2,2,4,231,4
+Pasture,230,230,2,0,0,1,3,231,-3
+Urban,3,0,5,0,1,0,3,1,-3
+Other,21,0,6,0,8,2,5,10,5
+Total,887,230,30,227,54,23,323,534,323

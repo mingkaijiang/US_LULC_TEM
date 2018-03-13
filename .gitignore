@@ -38,3 +38,5 @@ vignettes/*.pdf
 
 # ignore pdf output
 *.pdf
+
+*.DS_Store

@@ -1,58 +1,74 @@
-### necessary functions
-rotate <- function(x) t(apply(x, 2, rev))
 
-### library
-library(raster)
-library(RColorBrewer)
+### read in files
+nceDF <- read.csv("input/NCE.csv")
+vegcDF <- read.csv("input/VEGC.csv")
 
+### plotting settings
+# two nice color palette for color blind
+# The palette with grey:
+cbPalette <- c("#999999", "#E69F00", "#56B4E9",
+               "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 
-### Result processing 1
-myDF1 <- read.table( "~/Documents/Research/Projects/US_LULE_effect_on_tree/Disturb_Paper/output_files/nce_lulcc_20112000_2009.map",
-                    skip = 6)
-myDF1 <- as.matrix(myDF1)
-myDF1 <- ifelse(myDF1==-1000000, NA, myDF1)
+# The palette with black:
+cbbPalette <- c("#000000", "#E69F00", "#56B4E9", 
+                "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 
-
-myDF2 <- read.table( "~/Documents/Research/Projects/US_LULE_effect_on_tree/Disturb_Paper/output_files/nce_lc1700.2000_2009.map",
-                     skip = 6)
-myDF2 <- as.matrix(myDF2)
-myDF2 <- ifelse(myDF2==-1000000, NA, myDF2)
-
-## matrix deduction
-myDF <- myDF1 - myDF2
-
-## make raster     
-r1 <- raster(myDF)
+require(ggplot2)
+require(gridExtra)
 
 
-### Result processing 2
-myDF3 <- read.table( "~/Documents/Research/Projects/US_LULE_effect_on_tree/Disturb_Paper/output_files/nce_lulcc_const2000_2009.map",
-                     skip = 6)
-myDF3 <- as.matrix(myDF3)
-myDF3 <- ifelse(myDF3==-1000000, NA, myDF3)
+## Plot Veg C
+p1 <- ggplot(vegcDF) +
+    geom_area(aes(x=year, y=LCLUC,  fill="LULCC")) +
+    geom_area(aes(x=year, y=O3, fill="O3")) +
+    geom_area(aes(x=year, y=Climate, fill="Climate")) +
+    geom_area(aes(x=year, y=Ndep, fill="Ndep")) +
+    geom_area(aes(x=year, y=CO2, fill="CO2")) +
+    theme_linedraw() +
+    theme(panel.grid.minor=element_blank(),
+          axis.text=element_text(size=12),
+          axis.title=element_text(size=14),
+          legend.text=element_text(size=12),
+          legend.title=element_text(size=12, face="bold"),
+          legend.position="none",
+          legend.background = element_rect(size=0.5, linetype="solid"),
+          panel.grid.major=element_line(color="grey")) +
+    ylim(-50, 10) + 
+    xlim(1700, 2011) +
+    guides(col=guide_legend(ncol=2)) +
+    labs(x="Year", y="Vegetation Carbon (PgC)") +
+    scale_fill_manual(name="Effect", 
+                        values = c("Climate" = cbbPalette[2], "CO2" = cbbPalette[3], 
+                                   "O3" = cbbPalette[5],
+                                   "LULCC" = cbbPalette[4], "Ndep" = cbbPalette[7]))+
+    annotate("text", x = 1710, y = 6, label = "(b)", size=8)
 
-## matrix deduction
-myDF <- myDF1 - myDF3
+### Disturbance effect on veg C
+p2 <- ggplot(nceDF) +
+    geom_area(aes(x=year, y=LCLUC,  fill="LULCC")) +
+    geom_area(aes(x=year, y=O3, fill="O3")) +
+    geom_area(aes(x=year, y=Climate, fill="Climate")) +
+    geom_area(aes(x=year, y=Ndep, fill="Ndep")) +
+    geom_area(aes(x=year, y=CO2, fill="CO2")) +
+    theme_linedraw() +
+    theme(panel.grid.minor=element_blank(),
+          axis.text=element_text(size=12),
+          axis.title=element_text(size=14),
+          legend.text=element_text(size=12),
+          legend.title=element_text(size=12, face="bold"),
+          legend.position=c(0.2,0.3),
+          legend.background = element_rect(size=0.5, linetype="solid"),
+          panel.grid.major=element_line(color="grey")) +
+    ylim(-50, 20) + 
+    xlim(1700, 2011) +
+    labs(x="Year", y="Cumulative NCE (PgC)") +
+    scale_fill_manual(name="Effect", 
+                      values = c("Climate" = cbbPalette[2], "CO2" = cbbPalette[3], 
+                                 "O3" = cbbPalette[5],
+                                 "LULCC" = cbbPalette[4], "Ndep" = cbbPalette[7]))+
+    annotate("text", x = 1710, y = 16, label = "(b)", size=8)
 
-## make raster     
-r2 <- raster(myDF)
-
-
-### Plotting
-test.col1 <- brewer.pal(6, "RdYlGn")
-plot(r1, breaks=c(-250, -100, -10, 10, 50, 100, 150),
-     col=test.col1,
-     axes=F)
-
-#plot(r1, breaks=c(-100, -67, -33, 0, 33, 67, 100),
-#     col=test.col1,
-#     axes=F)
-
-test.col2 <- brewer.pal(8, "RdYlGn")
-plot(r2, breaks=c(-200, -100, -67, -33, 0, 33, 67, 100, 800),
-     col=test.col2,
-     axes=F)
-
-
-
+pdf("Figure3.pdf")
+grid.arrange(p1, p2, ncol=1)
+dev.off()
 

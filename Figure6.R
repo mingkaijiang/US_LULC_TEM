@@ -1,6 +1,9 @@
 
 ### read in files
-nceDF <- read.csv("input/NCE.csv")
+ndep1DF <- read.csv("input/NDEP_sens_kn1.csv")
+ndep2DF <- read.csv("input/NDEP_sens_kn2.csv")
+co2DF <- read.csv("input/CO2_sens.csv")
+
 
 ### plotting settings
 # two nice color palette for color blind
@@ -17,54 +20,48 @@ require(gridExtra)
 
 
 ## Plot sensitivity to timber and ag assumptions
-p1 <- ggplot(nceDF) +
-    geom_line(aes(x=year, y=TIMBER_SENS_cum/1000, col="Timber Lu et al")) +
-    geom_line(aes(x=year, y=AG_SENS_CUM/1000, col="Ag burning")) +
-    geom_line(aes(x=year, y=X500_SENS_cum/1000, col="Ag 500")) +
-    geom_line(aes(x=year, y=LCLUC_2011_cum/1000, col="LULCC")) +
+p1 <- ggplot(ndep2DF) +
+    geom_line(aes(x=year, y=kn2003_effect/1000, col="kn2003")) +
+    geom_line(aes(x=year, y=kn2004_effect/1000, col="kn2004")) +
+    geom_line(aes(x=year, y=kn2005_effect/1000, col="kn2005")) +
     theme_linedraw() +
     theme(panel.grid.minor=element_blank(),
           axis.text=element_text(size=12),
           axis.title=element_text(size=14),
           legend.text=element_text(size=12),
-          legend.title=element_text(size=12, face="bold"),
-          legend.position=c(0.25,0.2),
+          legend.title=element_text(size=14, face="bold"),
+          legend.position=c(0.9,0.2),
           legend.background = element_rect(size=0.5, linetype="solid"),
           panel.grid.major=element_line(color="grey")) +
-    ylim(-60, 10) + 
+    ylim(-4, 10) + 
     xlim(1700, 2011) +
-    guides(col=guide_legend(ncol=2)) +
-    labs(x="Year", y="Cumulative NCE (PgC)") +
+    labs(x="Year", y="Cumulative NEP (PgC)") +
     scale_colour_manual(name="Sensitivity", 
-                        values = c("Timber Lu et al" = cbbPalette[4], "Ag burning" = cbbPalette[2], 
-                                   "Ag 500" = cbbPalette[7],
-                                   "LULCC" = cbbPalette[1]))+
-    annotate("text", x = 1710, y = 6, label = "(a)", size=8)
+                        values = c("kn2003" = cbbPalette[4], "kn2004" = cbbPalette[2], 
+                                   "kn2005" = cbbPalette[1]))+
+    annotate("text", x = 1710, y = 9, label = "(a)", size=8)
 
 ### Plot sens to timber and ag
-p2 <- ggplot(nceDF) +
-    geom_area(aes(x=year, y=timber_effect_sens, fill="Timber Lu et al")) +
-    geom_area(aes(x=year, y=Timber.Effect, fill="Timber")) +
-    geom_area(aes(x=year, y=X500_effect_sens, fill="Ag 500")) +
-    geom_area(aes(x=year, y=ag_sens, fill="Ag burning")) +
+p2 <- ggplot(co2DF) +
+    geom_line(aes(x=year, y=CO2_ori/1000, col="kc40")) +
+    geom_line(aes(x=year, y=CO2_kc200/1000, col="kc200")) +
+    geom_line(aes(x=year, y=CO2_kc400/1000, col="kc400")) +
     theme_linedraw() +
     theme(panel.grid.minor=element_blank(),
           axis.text=element_text(size=12),
           axis.title=element_text(size=14),
           legend.text=element_text(size=12),
-          legend.title=element_text(size=12, face="bold"),
-          legend.position=c(0.2,0.25),
+          legend.title=element_text(size=14, face="bold"),
+          legend.position=c(0.9,0.2),
           legend.background = element_rect(size=0.5, linetype="solid"),
           panel.grid.major=element_line(color="grey")) +
-    ylim(-15, 5) + 
+    ylim(-0.5, 3.0) + 
     xlim(1700, 2011) +
-    guides(col=guide_legend(ncol=2)) +
-    labs(x="Year", y="Cumulative NCE (PgC)") +
-    scale_fill_manual(name="Effect", 
-                        values = c("Ag burning" = cbbPalette[7], "Timber" = cbbPalette[6], 
-                                   "Ag 500" = cbbPalette[2], 
-                                   "Timber Lu et al" = cbbPalette[3])) +
-    annotate("text", x = 1710, y = 4, label = "(b)", size=8)
+    labs(x="Year", y="Cumulative NEP (PgC)") +
+    scale_colour_manual(name="Sensitivity", 
+                        values = c("kc40" = cbbPalette[1], "kc200" = cbbPalette[2], 
+                                   "kc400" = cbbPalette[4])) +
+    annotate("text", x = 1710, y = 2.8, label = "(b)", size=8)
 
 pdf("Figure6.pdf")
 grid.arrange(p1, p2, ncol=1)

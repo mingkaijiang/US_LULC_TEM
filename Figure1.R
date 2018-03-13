@@ -1,11 +1,6 @@
 
 ### read in files
-nceDF <- read.csv("input/NCE.csv")
-ncepftDF <- read.csv("input/NCE_PFT.csv")
-nepDF <- read.csv("input/NEP_PFT.csv")
 vegcDF <- read.csv("input/VEGC.csv")
-ndep1DF <- read.csv("input/NDEP_sens_kn1.csv")
-ndep2DF <- read.csv("input/NDEP_sens_kn2.csv")
 
 ### plotting settings
 # two nice color palette for color blind
@@ -69,38 +64,3 @@ p2 <- ggplot(vegcDF) +
 pdf("Figure1.pdf")
 grid.arrange(p1, p2, ncol=1)
 dev.off()
-
-
-### plot
-p<-ggplot() + 
-    geom_line(data=cdf, aes(x=nc, y=P350, col="C350"), size=0.5, linetype="dotted")+   
-    geom_line(data=cdf, aes(x=nc, y=VL, col="VL"), size=0.5, linetype="dotted") + 
-    geom_line(data=cdf, aes(x=nc, y=L, col="L"), size=0.5, linetype="dotted") +  
-    geom_line(data=cdf, aes(x=nc, y=M, col="M"), size=0.5, linetype="dotted") +            
-    geom_line(data=cdf, aes(x=nc, y=P700, col="C700"), size=0.5, linetype="dotted") +     
-    geom_point(data=edf, aes(x=nc_VL, y=NPP_VL, fill="A"), 
-               color="black", shape=21, size=3) + 
-    geom_point(data=edf, aes(x=nc_L_700, y=NPP_L_700, fill="D"), 
-               shape=21, color="black", size=3) +
-    geom_point(data=edf, aes(x=nc_VL_700, y=NPP_VL_700, fill="E"), 
-               shape=21, color="black", size=3) +
-    geom_point(data=edf, aes(x=nc_M_700, y=NPP_M_700, fill="C"), 
-               shape=21, color="black", size=3) +
-    geom_point(data=edf, aes(x=nc_I, y=NPP_I, fill="B"), 
-               shape=21, color="black", size=3) +
-    ylim(1.0, 4.0) + 
-    xlim(0.001, 0.04) +
-    labs(x="Shoot N:C Ratio", 
-         y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
-    theme_linedraw() +
-    theme(panel.grid.minor=element_blank(),
-          axis.text=element_text(size=12),
-          axis.title=element_text(size=14),
-          legend.text=element_text(size=12),
-          legend.title=element_text(size=14),
-          panel.grid.major=element_line(color="grey")) +
-    scale_colour_manual(name="Constraint line", 
-                        values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
-                                   "L" = cbbPalette[4], "M" = cbbPalette[3])) +
-    scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
-                                                  "D" = cbPalette[4], "E" = cbPalette[7])) 

@@ -44,6 +44,9 @@ plot(r1, breaks=c(-250, -100, -10, 10, 50, 100, 150),
      col=test.col1,
      axes=F)
 
+#plot(r1, breaks=c(-100, -67, -33, 0, 33, 67, 100),
+#     col=test.col1,
+#     axes=F)
 
 test.col2 <- brewer.pal(8, "RdYlGn")
 plot(r2, breaks=c(-200, -100, -67, -33, 0, 33, 67, 100, 800),

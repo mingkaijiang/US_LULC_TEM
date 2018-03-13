@@ -36,7 +36,7 @@ p1 <- ggplot(ndep2DF) +
     ylim(-4, 10) + 
     xlim(1700, 2011) +
     labs(x="Year", y="Cumulative NEP (PgC)") +
-    scale_colour_manual(name="Simulation", 
+    scale_colour_manual(name="Sensitivity", 
                         values = c("kn2003" = cbbPalette[4], "kn2004" = cbbPalette[2], 
                                    "kn2005" = cbbPalette[1]))+
     annotate("text", x = 1710, y = 9, label = "(a)", size=8)
@@ -58,7 +58,7 @@ p2 <- ggplot(co2DF) +
     ylim(-0.5, 3.0) + 
     xlim(1700, 2011) +
     labs(x="Year", y="Cumulative NEP (PgC)") +
-    scale_colour_manual(name="Scenario", 
+    scale_colour_manual(name="Sensitivity", 
                         values = c("kc40" = cbbPalette[1], "kc200" = cbbPalette[2], 
                                    "kc400" = cbbPalette[4])) +
     annotate("text", x = 1710, y = 2.8, label = "(b)", size=8)

@@ -37,10 +37,10 @@ p1 <- ggplot(vegcDF) +
     xlim(1700, 2011) +
     guides(col=guide_legend(ncol=2)) +
     labs(x="Year", y="Vegetation Carbon (PgC)") +
-    scale_fill_manual(name="Scenario", 
+    scale_fill_manual(name="Effect", 
                         values = c("Climate" = cbbPalette[2], "CO2" = cbbPalette[3], 
-                                   "O3" = cbbPalette[4],
-                                   "LULCC" = cbbPalette[5], "Ndep" = cbbPalette[7]))+
+                                   "O3" = cbbPalette[5],
+                                   "LULCC" = cbbPalette[4], "Ndep" = cbbPalette[7]))+
     annotate("text", x = 1710, y = 6, label = "(b)", size=8)
 
 ### Disturbance effect on veg C
@@ -62,10 +62,10 @@ p2 <- ggplot(nceDF) +
     ylim(-50, 20) + 
     xlim(1700, 2011) +
     labs(x="Year", y="Cumulative NCE (PgC)") +
-    scale_fill_manual(name="Scenario", 
+    scale_fill_manual(name="Effect", 
                       values = c("Climate" = cbbPalette[2], "CO2" = cbbPalette[3], 
-                                 "O3" = cbbPalette[4],
-                                 "LULCC" = cbbPalette[5], "Ndep" = cbbPalette[7]))+
+                                 "O3" = cbbPalette[5],
+                                 "LULCC" = cbbPalette[4], "Ndep" = cbbPalette[7]))+
     annotate("text", x = 1710, y = 16, label = "(b)", size=8)
 
 pdf("Figure4.pdf")

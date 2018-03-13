@@ -44,9 +44,9 @@ p1 <- ggplot(vegcDF) +
 
 ### Disturbance effect on veg C
 p2 <- ggplot(vegcDF) +
-    geom_line(aes(x=year, y=Conversion.Effect, col="Conversion")) +
-    geom_line(aes(x=year, y=Timber.Effect, col="Timber")) +
-    geom_line(aes(x=year, y=Growth.Enhancements, col="Growth")) +
+    geom_area(aes(x=year, y=Conversion.Effect, fill="Conversion")) +
+    geom_area(aes(x=year, y=Timber.Effect, fill="Timber")) +
+    geom_area(aes(x=year, y=Growth.Enhancements, fill="Growth")) +
     theme_linedraw() +
     theme(panel.grid.minor=element_blank(),
           axis.text=element_text(size=12),
@@ -59,9 +59,9 @@ p2 <- ggplot(vegcDF) +
     ylim(-40, 10) + 
     xlim(1700, 2011) +
     labs(x="Year", y="Vegetation Carbon (PgC)") +
-    scale_colour_manual(name="Scenario", 
-                        values = c("Conversion" = cbbPalette[2], "Timber" = cbbPalette[4], 
-                                   "Growth" = cbbPalette[6])) +
+    scale_fill_manual(name="Effect", 
+                        values = c("Conversion" = cbbPalette[8], "Timber" = cbbPalette[5], 
+                                   "Growth" = cbbPalette[4])) +
     annotate("text", x = 1710, y = 6, label = "(b)", size=8)
 
 pdf("Figure1.pdf")

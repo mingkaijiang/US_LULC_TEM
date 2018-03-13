@@ -1,6 +1,6 @@
 
 ### read in files
-vegcDF <- read.csv("input/VEGC.csv")
+nceDF <- read.csv("input/NCE.csv")
 
 ### plotting settings
 # two nice color palette for color blind
@@ -16,13 +16,12 @@ require(ggplot2)
 require(gridExtra)
 
 
-## Plot Veg C
-p1 <- ggplot(vegcDF) +
-    geom_line(aes(x=year, y=LC1700/1000, col="LC1700")) +
-    geom_line(aes(x=year, y=LC2011/1000, col="LC2011")) +
-    geom_line(aes(x=year, y=LCLUC_NOTIMBER/1000, col="NOTIMBER")) +
-    geom_line(aes(x=year, y=LCLUC_2011/1000, col="LULCC")) +
-    geom_line(aes(x=year, y=LCLUC_CONST/1000, col="LULCC_CONST")) +
+## Plot sensitivity to timber and ag assumptions
+p1 <- ggplot(nceDF) +
+    geom_line(aes(x=year, y=TIMBER_SENS_cum/1000, col="TIMBER")) +
+    geom_line(aes(x=year, y=AG_SENS_CUM/1000, col="AGRICULTURE")) +
+    geom_line(aes(x=year, y=X500_SENS_cum/1000, col="500PRODUCT")) +
+    geom_line(aes(x=year, y=LCLUC_2011_cum/1000, col="LULCC")) +
     theme_linedraw() +
     theme(panel.grid.minor=element_blank(),
           axis.text=element_text(size=12),
@@ -32,38 +31,42 @@ p1 <- ggplot(vegcDF) +
           legend.position=c(0.25,0.2),
           legend.background = element_rect(size=0.5, linetype="solid"),
           panel.grid.major=element_line(color="grey")) +
-    ylim(10, 80) + 
+    ylim(-60, 10) + 
     xlim(1700, 2011) +
     guides(col=guide_legend(ncol=2)) +
-    labs(x="Year", y="Vegetation Carbon (PgC)") +
+    labs(x="Year", y="Cumulative NCE (PgC)") +
     scale_colour_manual(name="Simulation", 
-                        values = c("LC1700" = cbbPalette[4], "LC2011" = cbbPalette[2], 
-                                   "NOTIMBER" = cbbPalette[7],
-                                   "LULCC" = cbbPalette[1], "LULCC_CONST" = cbbPalette[3]))+
-    annotate("text", x = 1710, y = 76, label = "(a)", size=8)
+                        values = c("TIMBER" = cbbPalette[4], "AGRICULTURE" = cbbPalette[2], 
+                                   "500PRODUCT" = cbbPalette[7],
+                                   "LULCC" = cbbPalette[1]))+
+    annotate("text", x = 1710, y = 6, label = "(a)", size=8)
 
-### Disturbance effect on veg C
-p2 <- ggplot(vegcDF) +
-    geom_line(aes(x=year, y=Conversion.Effect, col="Conversion")) +
+### Plot sens to timber and ag
+p2 <- ggplot(nceDF) +
+    geom_line(aes(x=year, y=ag_sens, col="Ag")) +
     geom_line(aes(x=year, y=Timber.Effect, col="Timber")) +
-    geom_line(aes(x=year, y=Growth.Enhancements, col="Growth")) +
+    geom_line(aes(x=year, y=timber_effect_sens, col="Timber Lu et al")) +
+    geom_line(aes(x=year, y=X500_effect_sens, col="Ag Lu et al")) +
     theme_linedraw() +
     theme(panel.grid.minor=element_blank(),
           axis.text=element_text(size=12),
           axis.title=element_text(size=14),
           legend.text=element_text(size=12),
           legend.title=element_text(size=12, face="bold"),
-          legend.position=c(0.15,0.2),
+          legend.position=c(0.25,0.2),
           legend.background = element_rect(size=0.5, linetype="solid"),
           panel.grid.major=element_line(color="grey")) +
-    ylim(-40, 10) + 
+    ylim(-15, 5) + 
     xlim(1700, 2011) +
-    labs(x="Year", y="Vegetation Carbon (PgC)") +
+    guides(col=guide_legend(ncol=2)) +
+    labs(x="Year", y="Cumulative NCE (PgC)") +
     scale_colour_manual(name="Scenario", 
-                        values = c("Conversion" = cbbPalette[2], "Timber" = cbbPalette[4], 
-                                   "Growth" = cbbPalette[6])) +
-    annotate("text", x = 1710, y = 6, label = "(b)", size=8)
+                        values = c("Ag" = cbbPalette[7], "Timber" = cbbPalette[6], 
+                                   "Ag Lu et al" = cbbPalette[2], 
+                                   "Timber Lu et al" = cbbPalette[3])) +
+    annotate("text", x = 1710, y = 4, label = "(b)", size=8)
 
-pdf("Figure1.pdf")
+pdf("Figure6.pdf")
 grid.arrange(p1, p2, ncol=1)
 dev.off()
+

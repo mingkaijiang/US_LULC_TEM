@@ -40,7 +40,8 @@ p1 <- ggplot(vegcDF) +
     scale_fill_manual(name="Scenario", 
                         values = c("Climate" = cbbPalette[2], "CO2" = cbbPalette[3], 
                                    "O3" = cbbPalette[4],
-                                   "LULCC" = cbbPalette[5], "Ndep" = cbbPalette[7]))
+                                   "LULCC" = cbbPalette[5], "Ndep" = cbbPalette[7]))+
+    annotate("text", x = 1710, y = 6, label = "(b)", size=8)
 
 ### Disturbance effect on veg C
 p2 <- ggplot(nceDF) +
@@ -64,7 +65,8 @@ p2 <- ggplot(nceDF) +
     scale_fill_manual(name="Scenario", 
                       values = c("Climate" = cbbPalette[2], "CO2" = cbbPalette[3], 
                                  "O3" = cbbPalette[4],
-                                 "LULCC" = cbbPalette[5], "Ndep" = cbbPalette[7]))
+                                 "LULCC" = cbbPalette[5], "Ndep" = cbbPalette[7]))+
+    annotate("text", x = 1710, y = 16, label = "(b)", size=8)
 
 pdf("Figure4.pdf")
 grid.arrange(p1, p2, ncol=1)

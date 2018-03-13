@@ -39,7 +39,8 @@ p1 <- ggplot(nceDF) +
     scale_colour_manual(name="Simulation", 
                         values = c("LC1700" = cbbPalette[4], "LC2011" = cbbPalette[2], 
                                    "NOTIMBER" = cbbPalette[7],
-                                   "LULCC" = cbbPalette[1], "LULCC_CONST" = cbbPalette[3]))
+                                   "LULCC" = cbbPalette[1], "LULCC_CONST" = cbbPalette[3]))+
+    annotate("text", x = 1710, y = 6, label = "(a)", size=8)
 
 ### Disturbance effect on NCE
 p2 <- ggplot(nceDF) +
@@ -60,7 +61,9 @@ p2 <- ggplot(nceDF) +
     labs(x="Year", y="Cumulative NCE (PgC)") +
     scale_colour_manual(name="Scenario", 
                         values = c("Conversion" = cbbPalette[2], "Timber" = cbbPalette[4], 
-                                   "Growth" = cbbPalette[6]))
+                                   "Growth" = cbbPalette[6]))+
+    annotate("text", x = 1710, y = 6, label = "(b)", size=8)
+
 pdf("Figure2.pdf")
 grid.arrange(p1, p2, ncol=1)
 dev.off()

@@ -16,7 +16,7 @@ require(ggplot2)
 require(gridExtra)
 
 
-## Plot Veg C
+## Plot NCE C
 p1 <- ggplot(nceDF) +
     geom_line(aes(x=year, y=LC1700_cum/1000, col="LC1700")) +
     geom_line(aes(x=year, y=LC2011_cum/1000, col="LC2011")) +

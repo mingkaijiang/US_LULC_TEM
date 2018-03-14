@@ -20,7 +20,7 @@ require(gridExtra)
 p1 <- ggplot(nceDF) +
     geom_line(aes(x=year, y=TIMBER_SENS_cum/1000, col="Timber Lu et al")) +
     geom_line(aes(x=year, y=AG_SENS_CUM/1000, col="Ag burning")) +
-    geom_line(aes(x=year, y=X500_SENS_cum/1000, col="Ag 500")) +
+    geom_line(aes(x=year, y=X500_SENS_cum/1000, col="LULCC 500")) +
     geom_line(aes(x=year, y=LCLUC_2011_cum/1000, col="LULCC")) +
     theme_linedraw() +
     theme(panel.grid.minor=element_blank(),
@@ -37,7 +37,7 @@ p1 <- ggplot(nceDF) +
     labs(x="Year", y="Cumulative NCE (PgC)") +
     scale_colour_manual(name="Sensitivity", 
                         values = c("Timber Lu et al" = cbbPalette[4], "Ag burning" = cbbPalette[2], 
-                                   "Ag 500" = cbbPalette[7],
+                                   "LULCC 500" = cbbPalette[7],
                                    "LULCC" = cbbPalette[1]))+
     annotate("text", x = 1710, y = 6, label = "(a)", size=8)
 
@@ -45,7 +45,7 @@ p1 <- ggplot(nceDF) +
 p2 <- ggplot(nceDF) +
     geom_area(aes(x=year, y=timber_effect_sens, fill="Timber Lu et al")) +
     geom_area(aes(x=year, y=Timber.Effect, fill="Timber")) +
-    geom_area(aes(x=year, y=X500_effect_sens, fill="Ag 500")) +
+    geom_area(aes(x=year, y=X500_effect_sens, fill="LULCC 500")) +
     geom_area(aes(x=year, y=ag_sens, fill="Ag burning")) +
     theme_linedraw() +
     theme(panel.grid.minor=element_blank(),
@@ -62,7 +62,7 @@ p2 <- ggplot(nceDF) +
     labs(x="Year", y="Cumulative NCE (PgC)") +
     scale_fill_manual(name="Effect", 
                         values = c("Ag burning" = cbbPalette[7], "Timber" = cbbPalette[6], 
-                                   "Ag 500" = cbbPalette[2], 
+                                   "LULCC 500" = cbbPalette[2], 
                                    "Timber Lu et al" = cbbPalette[3])) +
     annotate("text", x = 1710, y = 4, label = "(b)", size=8)
 

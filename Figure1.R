@@ -36,7 +36,7 @@ p1 <- ggplot(vegcDF) +
     xlim(1700, 2011) +
     guides(col=guide_legend(ncol=2)) +
     labs(x="Year", y="Vegetation Carbon (PgC)") +
-    scale_colour_manual(name="Simulation", 
+    scale_colour_manual(name="Experiment", 
                         values = c("LC1700" = cbbPalette[4], "LC2011" = cbbPalette[2], 
                                    "NOTIMBER" = cbbPalette[7],
                                    "LULCC" = cbbPalette[1], "LULCC_CONST" = cbbPalette[3]))+

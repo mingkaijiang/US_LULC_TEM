@@ -41,7 +41,7 @@ p1 <- ggplot(vegcDF) +
                         values = c("Climate" = cbbPalette[2], "CO2" = cbbPalette[3], 
                                    "O3" = cbbPalette[5],
                                    "LULCC" = cbbPalette[4], "Ndep" = cbbPalette[7]))+
-    annotate("text", x = 1710, y = 6, label = "(b)", size=8)
+    annotate("text", x = 1710, y = 6, label = "(a)", size=8)
 
 ### Disturbance effect on veg C
 p2 <- ggplot(nceDF) +

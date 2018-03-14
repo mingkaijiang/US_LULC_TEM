@@ -2,6 +2,8 @@
 vegcDF <- read.csv("input/VEGC.csv")
 nceDF <- read.csv("input/NCE.csv")
 stDF <- read.csv("input/STOCKS.csv")
+nepDF <- read.csv("input/NEP.csv")
+
 
 ### plotting settings
 # two nice color palette for color blind
@@ -100,10 +102,16 @@ sDF[sDF$Decade == "1980s", "Value"] <- mean(stDF[stDF$year >=1981 & stDF$year <=
 sDF[sDF$Decade == "1990s", "Value"] <- mean(stDF[stDF$year >=1991 & stDF$year <= 2000, "solc"])/1000
 sDF[sDF$Decade == "2000s", "Value"] <- mean(stDF[stDF$year >=2001 & stDF$year <= 2010, "solc"])/1000
 
+nDF <- sDF
+nDF$Term <- "NEP"
+nDF[nDF$Decade == "1960s", "Value"] <- mean(nepDF[nepDF$year >=1961 & nepDF$year <= 1970, "NEP_2011"])
+nDF[nDF$Decade == "1970s", "Value"] <- mean(nepDF[nepDF$year >=1971 & nepDF$year <= 1980, "NEP_2011"])
+nDF[nDF$Decade == "1980s", "Value"] <- mean(nepDF[nepDF$year >=1981 & nepDF$year <= 1990, "NEP_2011"])
+nDF[nDF$Decade == "1990s", "Value"] <- mean(nepDF[nepDF$year >=1991 & nepDF$year <= 2000, "NEP_2011"])
+nDF[nDF$Decade == "2000s", "Value"] <- mean(nepDF[nepDF$year >=2001 & nepDF$year <= 2010, "NEP_2011"])
 
 
-
-plotDF <- rbind(dDF1,vDF, sDF)
+plotDF <- rbind(dDF1,vDF, sDF, nDF)
 
 ## Plot NCE and vegc
 p2 <- ggplot(plotDF) +
@@ -115,14 +123,15 @@ p2 <- ggplot(plotDF) +
           axis.title=element_text(size=14),
           legend.text=element_text(size=12),
           legend.title=element_text(size=14, face="bold"),
-          legend.position=c(0.85,0.85),
+          legend.position=c(0.3,0.88),
           panel.grid.major=element_line(color="grey")) + 
-    ylab(expression(paste("NCE (TgC", yr^-1, ")"))) + xlab("Decade") +
-    scale_fill_manual(name="Experiment", values = c("NCE" = cbPalette[3], "VegC" = cbPalette[5],
+    ylab(expression(paste("Fluxes (TgC", yr^-1, ")"))) + xlab("Decade") +
+    scale_fill_manual(name="Experiment", values = c("NCE" = cbPalette[3], "NEP" = cbPalette[6], 
+                                                    "VegC" = cbPalette[5],
                                                     "SoilC" = cbPalette[2]))
 
 p2 <- p2 + scale_y_continuous(sec.axis = sec_axis(trans = ~ . / 2, 
-                                                  name = "C stock (PgC)"))
+                                                  name = "Stocks (PgC)"))
 plot(p2)
 
 #### pdf output

@@ -68,7 +68,7 @@ p2 <- ggplot(nceDF) +
                                  "LULCC" = cbbPalette[4], "Ndep" = cbbPalette[7]))+
     annotate("text", x = 1710, y = 16, label = "(b)", size=8)
 
-pdf("Figure3.pdf")
+pdf("Figure4.pdf")
 grid.arrange(p1, p2, ncol=1)
 dev.off()
 

@@ -21,9 +21,9 @@ require(gridExtra)
 
 ## Plot sensitivity to timber and ag assumptions
 p1 <- ggplot(ndep2DF) +
-    geom_line(aes(x=year, y=kn2003_effect/1000, col="kn2003")) +
-    geom_line(aes(x=year, y=kn2004_effect/1000, col="kn2004")) +
-    geom_line(aes(x=year, y=kn2005_effect/1000, col="kn2005")) +
+    geom_line(aes(x=year, y=kn2003_effect/1000, col="kn003")) +
+    geom_line(aes(x=year, y=kn2004_effect/1000, col="kn004")) +
+    geom_line(aes(x=year, y=kn2005_effect/1000, col="kn005")) +
     theme_linedraw() +
     theme(panel.grid.minor=element_blank(),
           axis.text=element_text(size=12),
@@ -37,8 +37,8 @@ p1 <- ggplot(ndep2DF) +
     xlim(1700, 2011) +
     labs(x="Year", y="Cumulative NEP (PgC)") +
     scale_colour_manual(name="Sensitivity", 
-                        values = c("kn2003" = cbbPalette[4], "kn2004" = cbbPalette[2], 
-                                   "kn2005" = cbbPalette[1]))+
+                        values = c("kn003" = cbbPalette[4], "kn004" = cbbPalette[2], 
+                                   "kn005" = cbbPalette[1]))+
     annotate("text", x = 1710, y = 9, label = "(a)", size=8)
 
 ### Plot sens to timber and ag

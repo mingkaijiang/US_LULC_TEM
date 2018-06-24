@@ -111,10 +111,13 @@ nDF[nDF$Decade == "1990s", "Value"] <- mean(nepDF[nepDF$year >=1991 & nepDF$year
 nDF[nDF$Decade == "2000s", "Value"] <- mean(nepDF[nepDF$year >=2001 & nepDF$year <= 2010, "NEP_2011"])
 
 
-plotDF <- rbind(dDF1,vDF, sDF, nDF)
+plotDF1 <- rbind(dDF1,nDF)
+
+plotDF2 <- rbind(vDF,sDF)
+
 
 ## Plot NCE and vegc
-p2 <- ggplot(plotDF) +
+p2 <- ggplot(plotDF1) +
     geom_bar(aes(x=Decade, y=Value, fill=Term),
              stat="identity", position=position_dodge()) +
     theme_linedraw() +
@@ -126,13 +129,29 @@ p2 <- ggplot(plotDF) +
           legend.position=c(0.3,0.88),
           panel.grid.major=element_line(color="grey")) + 
     ylab(expression(paste("Fluxes (TgC", yr^-1, ")"))) + xlab("Decade") +
-    scale_fill_manual(name="Experiment", values = c("NCE" = cbPalette[3], "NEP" = cbPalette[6], 
-                                                    "VegC" = cbPalette[5],
-                                                    "SoilC" = cbPalette[2]))
+    scale_fill_manual(name="Fluxes", values = c("NCE" = "orange", "NEP" = "navyblue"))
 
-p2 <- p2 + scale_y_continuous(sec.axis = sec_axis(trans = ~ . / 2, 
-                                                  name = "Stocks (PgC)"))
-plot(p2)
+# plot(p2)
+#p2 <- p2 + scale_y_continuous(sec.axis = sec_axis(trans = ~ . / 2, 
+#                                                  name = "Stocks (PgC)"))
+
+## Plot NCE and vegc
+p3 <- ggplot(plotDF2) +
+    geom_bar(aes(x=Decade, y=Value, fill=Term),
+             stat="identity", position=position_dodge()) +
+    theme_linedraw() +
+    theme(panel.grid.minor=element_blank(),
+          axis.text=element_text(size=12),
+          axis.title=element_text(size=14),
+          legend.text=element_text(size=12),
+          legend.title=element_text(size=14, face="bold"),
+          legend.position=c(0.3,0.88),
+          panel.grid.major=element_line(color="grey")) + 
+    ylab("Stocks (PgC)") + xlab("Decade") +
+    scale_fill_manual(name="Stocks", values = c("VegC" = cbPalette[5],
+                                          "SoilC" = cbPalette[2])) +
+    scale_y_continuous(limits=c(0, 50))
+
 
 #### pdf output
 pdf("Figure1.pdf")

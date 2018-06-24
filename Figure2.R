@@ -39,8 +39,9 @@ p1 <- ggplot(vegcDF) +
     scale_colour_manual(name="Experiment", 
                         values = c("LC1700" = cbbPalette[4], "LC2011" = cbbPalette[2], 
                                    "NOTIMBER" = cbbPalette[7],
-                                   "LULCC" = cbbPalette[1], "LULCC_CONST" = cbbPalette[3]))+
+                                   "LULCC" = cbbPalette[1], "LULCC_CONST" = cbbPalette[3])) +
     annotate("text", x = 1710, y = 76, label = "(a)", size=8)
+
 
 ### Disturbance effect on veg C
 p2 <- ggplot(vegcDF) +
@@ -80,14 +81,20 @@ p3 <- ggplot(nceDF) +
           legend.title=element_text(size=12, face="bold"),
           legend.position=c(0.2,0.25),
           legend.background = element_rect(size=0.5, linetype="solid"),
-          panel.grid.major=element_line(color="grey")) +
+          panel.grid.major=element_line(color="grey"),
+          legend.text.align=0) +
     ylim(-50, 10) + 
     xlim(1700, 2011) +
     labs(x="Year", y="Cumulative NCE (PgC)") +
-    scale_colour_manual(name="Simulation", 
+    scale_colour_manual(name="Run", 
                         values = c("LC1700" = cbbPalette[4], "LC2011" = cbbPalette[2], 
                                    "NOTIMBER" = cbbPalette[7],
-                                   "LULCC" = cbbPalette[1], "LULCC_CONST" = cbbPalette[3]))+
+                                   "LULCC" = cbbPalette[1], "LULCC_CONST" = cbbPalette[3]),
+                        labels = c(expression({R[LC1700]}),
+                                   expression({R[LC2011]}),
+                                   expression({R[NOTIMBER]}),
+                                   expression({R[LULCC]}),
+                                   expression({R[LULCC_CONST]}))) +
     annotate("text", x = 1710, y = 6, label = "(c)", size=8)
 
 ### Disturbance effect on NCE
@@ -103,17 +110,21 @@ p4 <- ggplot(nceDF) +
           legend.title=element_text(size=12, face="bold"),
           legend.position=c(0.2,0.2),
           legend.background = element_rect(size=0.5, linetype="solid"),
-          panel.grid.major=element_line(color="grey")) +
+          panel.grid.major=element_line(color="grey"),
+          legend.text.align=0) +
     ylim(-50, 10) + 
     xlim(1700, 2011) +
     labs(x="Year", y="Cumulative NCE (PgC)") +
     scale_fill_manual(name="Effect", 
                       values = c("Conversion" = cbbPalette[8], "Timber" = cbbPalette[5], 
-                                 "Growth" = cbbPalette[4]))+
+                                 "Growth" = cbbPalette[4]),
+                      labels = c(expression(paste({E}^1.3, " LULCC")),
+                                 expression(paste({E}^2.1, " Growth")),
+                                 expression(paste({E}^3.1, " Timber"))))+
     annotate("text", x = 1710, y = 6, label = "(d)", size=8)
 
 
-
+plot(p4)
 
 
 #### pdf output

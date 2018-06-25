@@ -38,9 +38,9 @@ p1 <- ggplot(vegcDF) +
     guides(col=guide_legend(ncol=2)) +
     labs(x="Year", y="Vegetation Carbon (PgC)") +
     scale_fill_manual(name="Effect", 
-                        values = c("Climate" = cbbPalette[2], "CO2" = cbbPalette[3], 
-                                   "O3" = cbbPalette[5],
-                                   "LULCC" = cbbPalette[4], "Ndep" = cbbPalette[7]))+
+                        values = c("Climate" = cbbPalette[2], "Ndep" = cbbPalette[7],
+                                   "O3" = cbbPalette[5], "CO2" = cbbPalette[3], 
+                                   "LULCC" = cbbPalette[4]))+
     annotate("text", x = 1710, y = 6, label = "(a)", size=8)
 
 ### Disturbance effect on veg C
@@ -58,14 +58,20 @@ p2 <- ggplot(nceDF) +
           legend.title=element_text(size=12, face="bold"),
           legend.position=c(0.2,0.3),
           legend.background = element_rect(size=0.5, linetype="solid"),
-          panel.grid.major=element_line(color="grey")) +
+          panel.grid.major=element_line(color="grey"),
+          legend.text.align=0) +
     ylim(-50, 20) + 
     xlim(1700, 2011) +
     labs(x="Year", y="Cumulative NCE (PgC)") +
     scale_fill_manual(name="Effect", 
-                      values = c("Climate" = cbbPalette[2], "CO2" = cbbPalette[3], 
-                                 "O3" = cbbPalette[5],
-                                 "LULCC" = cbbPalette[4], "Ndep" = cbbPalette[7]))+
+                      values = c("Climate" = cbbPalette[2], "Ndep" = cbbPalette[7],
+                                 "O3" = cbbPalette[5], "CO2" = cbbPalette[3], 
+                                 "LULCC" = cbbPalette[4]),
+                      labels = c(expression(paste({E}^4.1, " Climate")),
+                                 expression(paste({E}^4.2, " Ndep")),
+                                 expression(paste({E}^4.3, " O3")),
+                                 expression(paste({E}^4.4, " CO2")),
+                                 expression(paste({E}^1.2, " LULCC"))))+
     annotate("text", x = 1710, y = 16, label = "(b)", size=8)
 
 pdf("Figure4.pdf")

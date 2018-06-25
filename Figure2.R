@@ -118,13 +118,11 @@ p4 <- ggplot(nceDF) +
     scale_fill_manual(name="Effect", 
                       values = c("Conversion" = cbbPalette[8], "Timber" = cbbPalette[5], 
                                  "Growth" = cbbPalette[4]),
-                      labels = c(expression(paste({E}^1.3, " LULCC")),
+                      labels = c(expression(paste({E}^1.3, " Conversion")),
                                  expression(paste({E}^2.1, " Growth")),
                                  expression(paste({E}^3.1, " Timber"))))+
     annotate("text", x = 1710, y = 6, label = "(d)", size=8)
 
-
-plot(p4)
 
 
 #### pdf output

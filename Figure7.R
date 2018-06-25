@@ -32,13 +32,17 @@ p1 <- ggplot(ndep2DF) +
           legend.title=element_text(size=14, face="bold"),
           legend.position=c(0.9,0.2),
           legend.background = element_rect(size=0.5, linetype="solid"),
-          panel.grid.major=element_line(color="grey")) +
+          panel.grid.major=element_line(color="grey"),
+          legend.text.align=0) +
     ylim(-4, 10) + 
     xlim(1700, 2011) +
     labs(x="Year", y="Cumulative NEP (PgC)") +
     scale_colour_manual(name="Sensitivity", 
                         values = c("kn003" = cbbPalette[4], "kn004" = cbbPalette[2], 
-                                   "kn005" = cbbPalette[1]))+
+                                   "kn005" = cbbPalette[1]),
+                        labels = c(expression(paste({k}[n], " = 0.003")),
+                                   expression(paste({k}[n], " = 0.004")),
+                                   expression(paste({k}[n], " = 0.005")))) +
     annotate("text", x = 1710, y = 9, label = "(a)", size=8)
 
 ### Plot sens to timber and ag
@@ -54,13 +58,17 @@ p2 <- ggplot(co2DF) +
           legend.title=element_text(size=14, face="bold"),
           legend.position=c(0.9,0.2),
           legend.background = element_rect(size=0.5, linetype="solid"),
-          panel.grid.major=element_line(color="grey")) +
+          panel.grid.major=element_line(color="grey"),
+          legend.text.align=0) +
     ylim(-0.5, 3.0) + 
     xlim(1700, 2011) +
     labs(x="Year", y="Cumulative NEP (PgC)") +
     scale_colour_manual(name="Sensitivity", 
                         values = c("kc40" = cbbPalette[1], "kc200" = cbbPalette[2], 
-                                   "kc400" = cbbPalette[4])) +
+                                   "kc400" = cbbPalette[4]),
+                        labels = c(expression(paste({k}[c], " = 40")),
+                                   expression(paste({k}[c], " = 200")),
+                                   expression(paste({k}[c], " = 400")))) +
     annotate("text", x = 1710, y = 2.8, label = "(b)", size=8)
 
 pdf("Figure7.pdf")

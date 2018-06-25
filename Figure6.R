@@ -42,7 +42,7 @@ p1 <- ggplot(nceDF) +
                         labels = c(expression({R[LULCC_TIMBER_LU]}),
                                    expression({R[LULCC_AG_BURN]}),
                                    expression({R[LULCC_500]}),
-                                   expression({R[LULCC_CONST]})))+
+                                   expression({R[LULCC]})))+
     annotate("text", x = 1710, y = 6, label = "(a)", size=8)
 
 ### Plot sens to timber and ag

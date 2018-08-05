@@ -92,9 +92,9 @@ p3 <- ggplot(nceDF) +
                                    "LULCC" = cbbPalette[1], "LULCC_CONST" = cbbPalette[3]),
                         labels = c(expression({R[LC1700]}),
                                    expression({R[LC2011]}),
-                                   expression({R[NOTIMBER]}),
                                    expression({R[LULCC]}),
-                                   expression({R[LULCC_CONST]}))) +
+                                   expression({R[LULCC_CONST]}),
+                        expression({R[NOTIMBER]}))) +
     annotate("text", x = 1710, y = 6, label = "(c)", size=8)
 
 ### Disturbance effect on NCE

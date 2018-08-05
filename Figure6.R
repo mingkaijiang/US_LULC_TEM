@@ -39,10 +39,10 @@ p1 <- ggplot(nceDF) +
     scale_colour_manual(name="Run", 
                         values = c("Timber Lu et al" = cbbPalette[4], "Ag burning" = cbbPalette[1], 
                                    "LULCC 500" = cbbPalette[7], "LULCC" = cbbPalette[2]),
-                        labels = c(expression({R[LULCC_TIMBER_LU]}),
-                                   expression({R[LULCC_AG_BURN]}),
+                        labels = c(expression({R[LULCC_AG_BURN]}),
+                                   expression({R[LULCC]}),
                                    expression({R[LULCC_500]}),
-                                   expression({R[LULCC]})))+
+                                   expression({R[LULCC_TIMBER_LU]})))+
     annotate("text", x = 1710, y = 6, label = "(a)", size=8)
 
 ### Plot sens to timber and ag
@@ -68,10 +68,10 @@ p2 <- ggplot(nceDF) +
     scale_fill_manual(name="Effect", 
                         values = c("Timber" = cbbPalette[6],"Timber Lu et al" = cbbPalette[3],
                                    "Ag burning" = cbbPalette[7],"LULCC 500" = cbbPalette[2]),
-                      labels = c(expression(paste({E}^3.1, " Timber")),
-                                 expression(paste({E}^3.2, " Timber Lu")),
-                                 expression(paste({E}^3.3, " Ag burn")),
-                                 expression(paste({E}^3.4, " 500-yr pool")))) +
+                      labels = c(expression(paste({E}^3.3, " Ag burn")),
+                                 expression(paste({E}^3.4, " 500-yr pool")),
+                                 expression(paste({E}^3.1, " Timber")),
+                                 expression(paste({E}^3.2, " Timber Lu")))) +
     annotate("text", x = 1710, y = 4, label = "(b)", size=8)
 
 pdf("Figure6.pdf")

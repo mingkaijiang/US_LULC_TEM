@@ -68,10 +68,10 @@ p2 <- ggplot(nceDF) +
                                  "O3" = cbbPalette[5], "CO2" = cbbPalette[3], 
                                  "LULCC" = cbbPalette[4]),
                       labels = c(expression(paste({E}^4.1, " Climate")),
-                                 expression(paste({E}^4.2, " Ndep")),
-                                 expression(paste({E}^4.3, " O3")),
                                  expression(paste({E}^4.4, " CO2")),
-                                 expression(paste({E}^1.2, " LULCC"))))+
+                                 expression(paste({E}^1.2, " LULCC")),
+                                 expression(paste({E}^4.2, " Ndep")),
+                                 expression(paste({E}^4.3, " O3"))))+
     annotate("text", x = 1710, y = 16, label = "(b)", size=8)
 
 pdf("Figure4.pdf")
